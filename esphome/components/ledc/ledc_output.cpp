@@ -69,7 +69,7 @@ esp_err_t configure_timer_frequency(ledc_mode_t speed_mode, ledc_timer_t timer_n
   }
 
   ledc_timer_config_t timer_conf{};
-  timer_conf.speed_mode = speed_mode;
+  timer_conf.speed_mode = LEDC_LOW_SPEED_MODE;
   timer_conf.duty_resolution = static_cast<ledc_timer_bit_t>(bit_depth);
   timer_conf.timer_num = timer_num;
   timer_conf.freq_hz = (uint32_t) frequency;
