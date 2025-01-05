@@ -18,12 +18,6 @@
 // starting with ESP32 Arduino 2.0.2, the 40MHz crystal is used as clock by default if supported
 #define CLOCK_FREQUENCY 40e6f
 #endif
-#else
-#ifdef SOC_LEDC_SUPPORT_APB_CLOCK
-#define DEFAULT_CLK LEDC_USE_APB_CLK
-#else
-#define DEFAULT_CLK LEDC_AUTO_CLK
-#endif
 #endif
 
 static const uint8_t SETUP_ATTEMPT_COUNT_MAX = 5;
@@ -170,6 +164,7 @@ void LEDCOutput::setup() {
   chan_conf.timer_sel = timer_num;
   chan_conf.duty = inverted_ == pin_->is_inverted() ? 0 : (1U << bit_depth_);
   chan_conf.hpoint = hpoint;
+  chan_conf.sleep_mode = LEDC_SLEEP_MODE_KEEP_ALIVE;
   ledc_channel_config(&chan_conf);
   initialized_ = true;
   this->status_clear_error();
