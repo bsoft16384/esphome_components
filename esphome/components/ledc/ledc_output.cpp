@@ -166,7 +166,7 @@ void LEDCOutput::setup() {
   chan_conf.hpoint = hpoint;
   // Not supported before ESP-IDF 5.4.0
   // chan_conf.sleep_mode = LEDC_SLEEP_MODE_KEEP_ALIVE;
-  gpio_sleep_sel_dis(pin_ -> get_pin());
+  gpio_sleep_sel_dis((gpio_num_t)(pin_->get_pin()));
   ledc_channel_config(&chan_conf);
   initialized_ = true;
   this->status_clear_error();
