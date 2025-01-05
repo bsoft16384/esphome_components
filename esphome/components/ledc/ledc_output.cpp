@@ -164,7 +164,8 @@ void LEDCOutput::setup() {
   chan_conf.timer_sel = timer_num;
   chan_conf.duty = inverted_ == pin_->is_inverted() ? 0 : (1U << bit_depth_);
   chan_conf.hpoint = hpoint;
-  chan_conf.sleep_mode = LEDC_SLEEP_MODE_KEEP_ALIVE;
+  // Not supported before ESP-IDF 5.4.0
+  // chan_conf.sleep_mode = LEDC_SLEEP_MODE_KEEP_ALIVE;
   ledc_channel_config(&chan_conf);
   initialized_ = true;
   this->status_clear_error();
